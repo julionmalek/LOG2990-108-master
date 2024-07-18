@@ -1,0 +1,145 @@
+<h1 class="title">Créer ou modifier un quiz</h1>
+<form class="form" [formGroup]="form" (ngSubmit)="submitForm()">
+    <input type="file" accept=".json" (change)="importQuiz($event)" hidden #fileInput />
+    <button mat-flat-button class="import" (click)="fileInput.click()" type="button"><mat-icon>cloud_upload</mat-icon> Importer un quiz</button>
+
+    <div class="field-group">
+        <h2 class="header">Détails</h2>
+        <mat-form-field class="field" hideRequiredMarker subscriptSizing="dynamic">
+            <mat-label>Titre du quiz</mat-label>
+            <input matInput formControlName="title" />
+            <mat-error>{{ getErrorDescription(['title']) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field" hideRequiredMarker subscriptSizing="dynamic">
+            <mat-label>Description du quiz</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+            <mat-error>{{ getErrorDescription(['description']) }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="field" hideRequiredMarker subscriptSizing="dynamic">
+            <mat-label>Temps de réponse par question (secondes)</mat-label>
+            <input matInput type="number" formControlName="duration" />
+            <mat-error>{{ getErrorDescription(['duration']) }}</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="field-group">
+        <h2 class="header">Questions</h2>
+        <div class="questions" formArrayName="questions" cdkDropList (cdkDropListDropped)="drop($event)">
+            <ng-container *ngFor="let question of questions.controls; let qIndex = index">
+                <div class="question-block" [formGroupName]="qIndex" cdkDrag>
+                    <div class="details">
+                        <mat-icon class="drag" cdkDragHandle>drag_indicator</mat-icon>
+                        <span class="index">{{ qIndex + 1 }} - </span>
+                        <mat-form-field class="field" hideRequiredMarker subscriptSizing="dynamic">
+                            <mat-label>Question {{ qIndex + 1 }}</mat-label>
+                            <input matInput formControlName="text" />
+                            <mat-error>{{ getErrorDescription(['questions', qIndex, 'text']) }}</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="field" hideRequiredMarker subscriptSizing="dynamic">
+                            <mat-label>Points</mat-label>
+                            <input matInput formControlName="points" />
+                            <mat-error>{{ getErrorDescription(['questions', qIndex, 'points']) }}</mat-error>
+                        </mat-form-field>
+
+                        <button type="button" mat-icon-button [matMenuTriggerFor]="questionMenu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #questionMenu="matMenu">
+                            <button type="button" mat-menu-item (click)="deleteQuestion(qIndex)" [disabled]="questions.controls.length <= 1">
+                                Supprimer question
+                            </button>
+                            <button type="button" mat-menu-item (click)="saveQuestionToBank(qIndex)">Ajouter à la banque de questions</button>
+                        </mat-menu>
+                    </div>
+
+                    <div class="choices" formArrayName="choices">
+                        <ng-container *ngFor="let choice of getChoices(question).controls; let oIndex = index" [formGroupName]="oIndex">
+                            <mat-error *ngIf="getChoices(question).errors?.invalidChoices && oIndex === 0 && questionDirty(qIndex)"
+                                >La question doit contenir au moins une bonne et une mauvaise réponse.</mat-error
+                            >
+                            <div class="choice-block">
+                                <div class="chevrons">
+                                    <mat-icon class="icon" [class.disabled]="oIndex === 0" (click)="oIndex !== 0 && moveChoice(qIndex, oIndex, 'up')"
+                                        >expand_less</mat-icon
+                                    >
+                                    <mat-icon
+                                        class="icon"
+                                        [class.disabled]="oIndex === getChoices(question).controls.length - 1"
+                                        (click)="oIndex !== getChoices(question).controls.length - 1 && moveChoice(qIndex, oIndex, 'down')"
+                                        >expand_more</mat-icon
+                                    >
+                                </div>
+                                <mat-form-field hideRequiredMarker subscriptSizing="dynamic">
+                                    <mat-label>Choix {{ oIndex + 1 }}</mat-label>
+                                    <input matInput formControlName="text" />
+                                    <mat-error>{{ getErrorDescription(['questions', qIndex, 'choices', oIndex, 'text']) }}</mat-error>
+                                </mat-form-field>
+
+                                <mat-checkbox class="check" formControlName="isCorrect">Bonne réponse</mat-checkbox>
+                                <button
+                                    type="button"
+                                    mat-icon-button
+                                    (click)="removeChoice(qIndex, oIndex)"
+                                    [disabled]="getChoices(question).length <= 2"
+                                >
+                                    <mat-icon>remove</mat-icon>
+                                </button>
+                            </div>
+                        </ng-container>
+                        <button
+                            type="button"
+                            class="add-choice"
+                            mat-mini-fab
+                            (click)="addChoice(qIndex)"
+                            [disabled]="getChoices(question).length >= 4"
+                        >
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+
+                    <!-- Custom preview for drag and drop -->
+                    <ng-template cdkDragPreview matchSize>
+                        <div class="preview">
+                            <mat-icon class="drag" cdkDragHandle fontIcon="drag_indicator"></mat-icon>
+                            <span class="index">{{ qIndex + 1 }} - </span>
+                            <mat-form-field class="field" hideRequiredMarker subscriptSizing="dynamic">
+                                <mat-label>Question {{ qIndex + 1 }}</mat-label>
+                                <input matInput formControlName="text" />
+                            </mat-form-field>
+
+                            <mat-form-field class="field" hideRequiredMarker subscriptSizing="dynamic">
+                                <mat-label>Points</mat-label>
+                                <input matInput formControlName="points" />
+                            </mat-form-field>
+
+                            <button type="button" mat-icon-button [matMenuTriggerFor]="questionMenu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #questionMenu="matMenu">
+                                <button type="button" mat-menu-item (click)="deleteQuestion(qIndex)">Supprimer question</button>
+                                <button type="button" mat-menu-item>Ajouter à la banque de questions</button>
+                            </mat-menu>
+                        </div>
+                    </ng-template>
+                </div>
+            </ng-container>
+        </div>
+
+        <button type="button" mat-flat-button class="add-question" [matMenuTriggerFor]="addQuestionMenu">
+            Ajouter une question
+            <mat-icon>add</mat-icon>
+        </button>
+        <mat-menu #addQuestionMenu="matMenu">
+            <button type="button" mat-menu-item (click)="addQuestion()">Créer une nouvelle question</button>
+            <button type="button" mat-menu-item (click)="loadQuestionFromBank()">Ajouter de la banque de questions</button>
+        </mat-menu>
+    </div>
+
+    <div class="buttons">
+        <button type="submit" mat-flat-button class="button">Sauvegarder</button>
+        <button (click)="cancel()" mat-flat-button style="background-color: #efefef; color: black" class="button">Annuler</button>
+    </div>
+</form>

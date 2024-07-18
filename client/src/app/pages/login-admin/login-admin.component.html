@@ -1,0 +1,5 @@
+<div class="justified">
+    <h2>Mot de passe</h2>
+    <input type="password" id="monInput" name="monInput" [(ngModel)]="motDePasse" (keyup.enter)="verifyPassword()" />
+    <button class="button" (click)="verifyPassword()">Se connecter</button>
+</div>

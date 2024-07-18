@@ -1,0 +1,106 @@
+@import 'src/utilities/variables';
+.quiz-card {
+    width: 300px;
+    border-radius: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .title {
+        margin: 5px 5px 0 5px;
+        font-weight: 600;
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .subtitle {
+        margin: 0 5px 5px 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .date-duration {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+
+        .date {
+            font-size: 12px;
+            opacity: 50%;
+        }
+
+        .duration {
+            display: flex;
+            justify-content: right;
+            align-items: center;
+
+            .icon {
+                margin-right: 2px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .text {
+                color: $primary-color;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .image-container {
+        height: 100px;
+
+        .image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 5px 5px 0 0;
+        }
+    }
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    padding: 5px 0;
+    background-color: $background-color;
+    border-top: 1px solid $trim-color;
+    border-radius: 0 0 5px 5px;
+}
+
+.actions mat-icon {
+    margin: 0 2px;
+    cursor: pointer;
+    transition:
+        color 0.3s ease-in-out,
+        transform 0.3s ease;
+
+    &:hover {
+        color: blue;
+        transform: scale(1.1);
+    }
+    .actions mat-icon.delete-icon:hover {
+        color: red;
+    }
+
+    &:active {
+        transform: scale(0.9);
+    }
+}
+
+.actions mat-icon.delete-icon:hover {
+    color: red;
+}
+
+::ng-deep .quiz-snackbar {
+    --mdc-snackbar-container-color: #9d2121;
+}

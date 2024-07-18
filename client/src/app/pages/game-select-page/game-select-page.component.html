@@ -1,0 +1,6 @@
+<h1 class="title">Quizzes</h1>
+<div class="quiz-cards">
+    <ng-container *ngFor="let quiz of quizzes">
+        <app-quiz-card *ngIf="!quiz.hidden" [quiz]="quiz" (fetchNeeded)="fetchQuizzes()"> </app-quiz-card>
+    </ng-container>
+</div>

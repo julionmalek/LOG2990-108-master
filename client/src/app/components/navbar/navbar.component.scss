@@ -1,0 +1,47 @@
+@import 'src/utilities/variables';
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    overflow: hidden;
+    height: $navbar-height;
+    background-color: $primary-color;
+
+    .button,
+    .icon-button {
+        font-weight: 400;
+        padding: 0 25px;
+        width: auto;
+        height: 48px;
+        border-radius: 5px;
+        font-size: large;
+        color: white;
+        background-color: $primary-color;
+        &:hover,
+        &.active {
+            filter: brightness(85%);
+        }
+    }
+
+    .image {
+        object-fit: contain;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .icon-button {
+        width: 64px;
+        height: 64px;
+        padding: 0;
+
+        .icon {
+            font-size: 24px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

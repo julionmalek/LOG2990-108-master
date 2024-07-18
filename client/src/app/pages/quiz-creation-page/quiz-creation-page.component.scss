@@ -1,0 +1,174 @@
+@import 'src/utilities/variables';
+.title {
+    font-size: 36px;
+    margin: 25px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .import {
+        background-color: $primary-color;
+        color: white;
+        width: 250px;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .field-group {
+        margin: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 70%;
+
+        .header,
+        .field {
+            width: 100%;
+            margin: 12px 0;
+        }
+
+        .questions {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .question-block {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 75px;
+
+                .details {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+
+                    .field,
+                    .index {
+                        margin-right: 10px;
+                    }
+
+                    .index {
+                        white-space: nowrap;
+                        font-size: 18px;
+                        font-weight: 600;
+                    }
+
+                    .drag {
+                        flex-shrink: 0;
+                        cursor: grab;
+                        margin: 10px;
+                    }
+                }
+
+                .choices {
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 50px;
+
+                    .choice-block {
+                        align-items: center;
+                        display: flex;
+                        margin-bottom: 10px;
+
+                        .chevrons {
+                            display: flex;
+                            flex-direction: column;
+                            margin: 10px;
+
+                            .icon {
+                                cursor: pointer;
+                                font-size: 30px;
+                                align-items: center;
+                                justify-content: center;
+                                display: flex;
+
+                                &.disabled {
+                                    opacity: 50%;
+                                    cursor: default;
+                                }
+                            }
+                        }
+                    }
+
+                    .add-choice {
+                        background-color: $secondary-color;
+                        font-size: 6px;
+
+                        &:disabled {
+                            filter: brightness(75%);
+                            color: $background-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .add-question {
+            background-color: $secondary-color;
+            color: $background-color;
+            font-weight: 400;
+            font-size: 16px;
+            padding: 25px;
+        }
+    }
+
+    .buttons {
+        margin: 50px 0;
+        display: flex;
+        width: fit-content;
+        justify-content: flex-start;
+        width: 70%;
+
+        .button {
+            font-weight: 600;
+            font-size: 20px;
+            padding: 30px 60px;
+            margin-right: 10px;
+            background-color: $primary-color;
+            color: white;
+        }
+    }
+}
+
+.button-container .mat-tab {
+    margin-left: auto;
+    margin-right: auto;
+    .h1 {
+        text-align: center;
+    }
+}
+
+.preview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 56px !important;
+    background-color: $background-color;
+
+    .drag {
+        flex-shrink: 0;
+        cursor: grab;
+        margin: 10px;
+    }
+
+    .index {
+        margin: 0 10px;
+        white-space: nowrap;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .field {
+        width: 100%;
+        margin-right: 10px;
+    }
+}
+
+::ng-deep .warn-snackbar {
+    --mdc-snackbar-container-color: #9d2121;
+}

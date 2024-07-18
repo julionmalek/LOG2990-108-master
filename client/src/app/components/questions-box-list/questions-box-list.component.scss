@@ -1,0 +1,49 @@
+.full-width {
+    width: 100%;
+}
+
+.top-padding {
+    padding-top: 3px;
+}
+
+.margin-left mat-radio-button:not(:first-child) {
+    margin-left: 10px;
+}
+
+.form-container {
+    margin: 100px;
+}
+
+.question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.question-card {
+    padding: 10px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border: 1px solid #ddd;
+}
+
+.question-card:hover {
+    background-color: #f0f0f0;
+}
+
+.mat-card-title {
+    margin: 0;
+}
+
+.mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.mat-card-actions button {
+    margin-left: 5px;
+}
+
+.last-mod-style {
+    color: darkgray;
+}

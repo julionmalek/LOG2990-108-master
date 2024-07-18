@@ -1,0 +1,42 @@
+<div class="waiting-container">
+    <div class="text-center">
+        <div *ngIf="!getGameStarted()">
+            <p>En attente<span class="dot dot1">.</span><span class="dot dot2">.</span><span class="dot dot3">.</span></p>
+        </div>
+        <div class="game-starting" *ngIf="getCountdown() > 0">
+            <h1>{{ getTitle() }}</h1>
+            <h2>La partie commence dans {{ getCountdown() }} secondes...</h2>
+        </div>
+        <div class="game" *ngIf="isOrganizer">
+            <mat-error class="error" *ngIf="isLocked && players.length < 1"> Une partie ne peut pas être démarrée si la salle est vide. </mat-error>
+            <button
+                class="start"
+                mat-raised-button
+                color="primary"
+                *ngIf="isLocked"
+                (click)="startGame()"
+                [disabled]="players.length < 1 || getGameStarted()"
+            >
+                Démarrer la partie
+            </button>
+            <div class="info">
+                <button mat-icon-button (click)="toggleLock()">
+                    <mat-icon>{{ isLocked ? 'lock' : 'lock_open' }}</mat-icon>
+                </button>
+                <div>Nom de la salle: {{ gameId }}</div>
+            </div>
+        </div>
+        <div class="players-list">
+            <div class="player-item" *ngFor="let player of players; let i = index">
+                <mat-icon>person</mat-icon>
+                <span>{{ player.name }}</span>
+                <button mat-icon-button *ngIf="isOrganizer" (click)="removePlayer(player.id)" [disabled]="getGameStarted()">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div *ngIf="!isOrganizer" class="leave-room-button">
+            <button mat-raised-button color="warn" (click)="removePlayerAndRedirectHome()">Quitter la salle</button>
+        </div>
+    </div>
+</div>

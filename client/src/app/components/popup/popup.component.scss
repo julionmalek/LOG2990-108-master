@@ -1,0 +1,86 @@
+@import 'src/utilities/variables';
+.popup {
+    width: 1536px;
+    height: auto;
+    display: flex;
+    background-color: #fafafa;
+
+    .details {
+        .title {
+            font-weight: 700;
+            font-size: 30px;
+            color: black;
+            margin: 15px 0;
+        }
+
+        .description {
+            margin: 0;
+        }
+
+        .image-container {
+            height: 324px;
+            width: 576px;
+
+            .image {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 5px 5px 0 0;
+            }
+        }
+
+        .buttons {
+            margin-top: 50px;
+            display: flex;
+            width: fit-content;
+            justify-content: space-between;
+
+            .button {
+                font-weight: 600;
+                font-size: 16px;
+                padding: 25px 50px;
+                margin-right: 10px;
+                background-color: $primary-color;
+                color: white;
+            }
+        }
+    }
+
+    .questions {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        width: 100%;
+
+        .question-block {
+            .question {
+                padding: 15px;
+                border-radius: 5px;
+                border: 1px;
+                background-color: white;
+                border-color: #f2f2f2;
+                border-style: solid;
+                color: black;
+                font-weight: 500;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .choices {
+                .choice {
+                    padding: 10px;
+                    border-radius: 5px;
+                    border: 1px;
+                    background-color: white;
+                    border-color: #f2f2f2;
+                    border-style: solid;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}

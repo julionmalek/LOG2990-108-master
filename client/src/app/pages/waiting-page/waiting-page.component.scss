@@ -1,0 +1,137 @@
+@import 'src/utilities/variables';
+
+.dot {
+    animation: dotFlashing 1.5s infinite linear alternate;
+    font-size: 2rem;
+    color: #76b852;
+}
+
+.dot1 {
+    animation-delay: 0s;
+}
+.dot2 {
+    animation-delay: 0.5s;
+}
+.dot3 {
+    animation-delay: 1s;
+}
+
+.chat-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+}
+
+@keyframes dotFlashing {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.waiting-container {
+    background: url('../../../assets/img/waiting-page-min.jpg');
+    color: #76b852;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: #f5f5f5;
+    background-size: cover;
+    background-position: center;
+    font-size: 24px;
+
+    .text-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 50px;
+
+        .game {
+            display: flex;
+            flex-wrap: wrap;
+
+            .error {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            .start {
+                background-color: $secondary-color;
+                color: white;
+                width: 100%;
+                font-size: 24px;
+                height: 50px;
+
+                &:disabled {
+                    filter: brightness(60%);
+                }
+            }
+
+            .info {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .game-starting {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h1 {
+                font-weight: 800;
+                background-color: $background-color;
+                color: black;
+                padding: 15px;
+                border-radius: 5px;
+                border: 1px black solid;
+            }
+
+            h2 {
+                color: white;
+            }
+        }
+    }
+    .leave-room-button {
+        margin-top: 20px;
+    }
+
+    .players-list {
+        display: flex;
+        align-items: center;
+        margin: 20px;
+        column-gap: 15px;
+        flex-wrap: wrap;
+
+        .player-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 20px;
+            background-color: #e3f2fd;
+
+            &:hover {
+                background-color: #bbdefb;
+            }
+
+            mat-icon {
+                margin-right: 10px;
+            }
+
+            button {
+                margin-left: auto;
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+@include mat.core();
+@import 'src/utilities/variables';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+// <uniquifier>: Use a uniquifier for the class name
+// <weight>: Use a value from 200 to 700
+body {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+}
+
+*:not(mat-icon) {
+    font-family: 'DM Sans', sans-serif !important;
+}
+
+// Override angular material checkbox styling
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-ripple .mat-ripple-element {
+    background-color: $secondary-color !important;
+}

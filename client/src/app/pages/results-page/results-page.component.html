@@ -1,0 +1,14 @@
+<ng-container>
+    <div id="results-page">
+        <div id="results-container">
+            <app-results-player-list [playerList]="playerList"></app-results-player-list>
+            <app-results-stats [histogramData]="histogramData" [quiz]="quiz"></app-results-stats>
+        </div>
+        <div class="footer-container">
+            <button routerLink="/home" mat-raised-button color="warn" class="quit">
+                <mat-icon>directions_run</mat-icon>
+                Revenir à la vue initiale
+            </button>
+        </div>
+    </div>
+</ng-container>

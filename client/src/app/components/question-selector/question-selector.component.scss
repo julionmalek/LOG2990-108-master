@@ -1,0 +1,46 @@
+@import 'src/utilities/variables';
+.questions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .question {
+        padding: 15px;
+        border-radius: 5px;
+        border: 1px;
+        background-color: white;
+        border-color: #f2f2f2;
+        border-style: solid;
+        color: black;
+        font-weight: 500;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .selected {
+        filter: brightness(80%);
+    }
+}
+
+.actions {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .error {
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+}
+
+.confirm {
+    background-color: $primary-color;
+    color: white;
+}
+
+.cancel {
+    background-color: $background-color;
+}

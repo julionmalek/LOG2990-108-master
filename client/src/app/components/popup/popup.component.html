@@ -1,0 +1,35 @@
+<mat-dialog-content class="popup">
+    <div class="details">
+        <div class="image-container">
+            <img mat-card-image class="image" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
+        </div>
+        <h2 class="title">{{ this.quiz.title }}</h2>
+        <p class="description">{{ this.quiz.description }}</p>
+        <div class="buttons">
+            <button class="button" mat-flat-button (click)="redirectToWaitingPage()">Créer</button>
+            <button
+                (click)="redirectToTestGamePage()"
+                style="background-color: #efefef; color: black"
+                class="button"
+                mat-flat-button
+            >
+                Tester
+            </button>
+        </div>
+    </div>
+    <div class="questions">
+        <h2>Questions</h2>
+        <div class="question-block">
+            <div *ngFor="let question of this.quiz.questions; index as i">
+                <div class="question" (click)="toggleQuestionChoices(question)">{{ i + 1 }} - {{ question.text }}</div>
+                <div class="choices" *ngIf="question.showChoices">
+                    <div class="choice" *ngFor="let choice of question.choices">
+                        {{ choice.text }}
+                        <mat-icon style="color: green" *ngIf="choice.isCorrect">check</mat-icon>
+                        <mat-icon style="color: red" *ngIf="!choice.isCorrect">close</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

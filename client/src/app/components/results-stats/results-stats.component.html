@@ -1,0 +1,7 @@
+<div *ngIf="histogramData">
+    <canvas class="chart" baseChart [data]="barChartData" [type]="barChartType" [options]="barChartOptions"></canvas>
+</div>
+<div>
+    <button class="prev-button button" (click)="getPreviousResults()">&lt;</button>
+    <button class="next-button button" (click)="getNextResults()">&gt;</button>
+</div>

@@ -1,0 +1,28 @@
+<div class="container justified">
+    <h1 class="header-item">Vue administrateur</h1>
+
+    <div class="quiz-cards">
+        <ng-container *ngFor="let quiz of quizzes">
+            <app-quiz-card [quiz]="quiz" [isAdminView]="true" (fetchNeeded)="fetchQuizzes()"> </app-quiz-card>
+        </ng-container>
+        <div routerLink="/create-quiz" class="add-quiz-card">
+            <span>+ Add Quiz</span>
+        </div>
+    </div>
+
+    <h2>Liste de questions</h2>
+
+    <div class="add-question-container">
+        <!-- Wrapping both the icon and text in a single clickable element -->
+        <button class="add-question-button" (click)="redirectBanquequiz()">
+            <div class="add-question-card">
+                <span>+</span>
+            </div>
+            <span class="add-question-text">Ajouter une question à la banque</span>
+        </button>
+    </div>
+
+    <app-questions-box-list></app-questions-box-list>
+
+    <br />
+</div>

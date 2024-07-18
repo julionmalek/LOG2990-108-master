@@ -1,0 +1,32 @@
+<div class="chat">
+    <div>
+        <h1>Chat - {{ chatHeaderTitle }}</h1>
+    </div>
+    <div class="messages-container" #messagesContainer>
+        <div
+            *ngFor="let message of messages"
+            class="message"
+            [ngClass]="{ mine: message.user === currentUser, others: message.user !== currentUser }"
+        >
+            {{ message.user }} <span *ngIf="message.isOrganizer">(Organizer)</span>: {{ message.message }}
+            <span class="timestamp">{{ message.timestamp | date: 'short' }}</span>
+        </div>
+    </div>
+    <div class="chat-input-container">
+        <mat-form-field class="chat-textbox" appearance="fill">
+            <input
+                matInput
+                #messageInput
+                [value]="newMessage.message"
+                (keydown.enter)="sendMessage()"
+                (input)="updateMessage($event); checkCharacterLimit(messageInput.value)"
+                (focus)="setFocus(true)"
+                (blur)="setFocus(false)"
+                placeholder="Type a message"
+                maxlength="200"
+            />
+        </mat-form-field>
+        <div *ngIf="characterLimitExceeded" class="character-limit-warning">You have exceeded the character limit!</div>
+        <button mat-raised-button color="primary" (click)="sendMessage()" class="send-button">Send</button>
+    </div>
+</div>

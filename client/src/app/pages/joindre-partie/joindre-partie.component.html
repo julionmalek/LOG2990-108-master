@@ -1,0 +1,12 @@
+<div class="justified">
+    <h2>Joindre une partie</h2>
+    Code d'accès:<input type="text" id="accessCode" name="accessCode" [(ngModel)]="accessCode" (keydown.enter)="joinGame()" /> Nom choisi:<input
+        type="text"
+        id="playerName"
+        name="playerName"
+        [(ngModel)]="playerName"
+        (keydown.enter)="joinGame()"
+    />
+    <button class="button" (click)="joinGame()">Rejoindre</button>
+</div>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

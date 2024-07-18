@@ -1,0 +1,68 @@
+<form [formGroup]="questionForm" class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Éditeur de Question</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="question-details">
+                <mat-form-field class="question-width">
+                    <mat-label>Titre de la Question</mat-label>
+                    <input formControlName="text" matInput placeholder="Entrez le titre de la question" />
+                </mat-form-field>
+                <mat-form-field class="points-width">
+                    <mat-label>Points</mat-label>
+                    <input formControlName="points" matInput type="number" placeholder="Entrez les points" />
+                    <mat-error *ngIf="questionForm.get('points')?.errors">
+                        <ng-container
+                            *ngIf="
+                                questionForm.get('points')?.errors?.min &&
+                                questionForm.get('points')?.value < 10 &&
+                                !questionForm.get('points')?.errors?.exceedsMaxValue
+                            "
+                            >La valeur minimale est 10</ng-container
+                        >
+                        <ng-container
+                            *ngIf="
+                                questionForm.get('points')?.errors?.notMultipleOfTen &&
+                                questionForm.get('points')?.value >= 10 &&
+                                !questionForm.get('points')?.errors?.exceedsMaxValue
+                            "
+                            >Les points doivent être un multiple de 10</ng-container
+                        >
+                        <ng-container *ngIf="questionForm.get('points')?.errors?.exceedsMaxValue"
+                            >La valeur des points ne doit pas dépasser 100</ng-container
+                        >
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div formArrayName="choices" *ngFor="let choice of choices.controls; let i = index" class="choices-container">
+                <div [formGroupName]="i" class="choice-group">
+                    <mat-form-field class="choice-width">
+                        <mat-label>Choice {{ i + 1 }}</mat-label>
+                        <input formControlName="text" matInput placeholder="Entrez le texte de l'choice" />
+                    </mat-form-field>
+                    <mat-checkbox [checked]="isChoiceCorrect(i)" (change)="onCorrectAnswerToggle(i, $event.checked)">Correcte</mat-checkbox>
+                    <button
+                        mat-icon-button
+                        [disabled]="choices.length <= 2"
+                        [class]="choices.length > 2 ? 'active' : 'disabled'"
+                        (click)="removeChoice(i)"
+                        aria-label="Supprimer l'choice"
+                    >
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="add-choice-container">
+                <button mat-raised-button color="primary" (click)="addChoice()" [disabled]="!canAddChoice()" class="add-choice-button">
+                    <mat-icon>add</mat-icon> Ajouter Choice
+                </button>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button (click)="saveForm()" mat-raised-button color="primary">Sauvegarder la Question</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

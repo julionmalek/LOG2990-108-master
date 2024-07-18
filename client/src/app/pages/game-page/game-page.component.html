@@ -1,0 +1,67 @@
+<div class="game-container">
+    <ng-container *ngIf="currentQuestionData">
+        <div class="points-question">{{ currentQuestionData.points }} points</div>
+        <h1 class="question-title">Q{{ currentQuestionData.index + 1 }} - {{ currentQuestionData.text }}</h1>
+        <div *ngIf="!getIsOrganizer()" class="answers">
+            <button
+                class="answer"
+                mat-raised-button
+                *ngFor="let choice of currentQuestionData.choices; let i = index"
+                (click)="selectAnswer(i)"
+                [ngClass]="{
+                    selected: isSelected(i),
+                    correct: isCorrect(i) && state.showAnswers,
+                    incorrect: !isCorrect(i) && state.showAnswers
+                }"
+                [disabled]="state.submittedAnswers"
+            >
+                {{ i + 1 }}- {{ choice.text }}
+            </button>
+        </div>
+    </ng-container>
+    <div class="countdown">
+        <ng-container *ngIf="state.transitionToNextQuestion; else remainingTime">
+            Prochaine question dans {{ state.countdown }} secondes
+        </ng-container>
+        <ng-template #remainingTime> Temps restant: {{ state.countdown }} secondes </ng-template>
+        <div class="progress-container">
+            <div class="bar" [style.width]="progress + '%'"></div>
+        </div>
+    </div>
+    <button *ngIf="!getIsOrganizer()" mat-raised-button class="submit" (click)="submitAnswers()" [disabled]="state.submittedAnswers">
+        <mat-icon>input</mat-icon>
+        Envoyer la réponse
+    </button>
+    <div *ngIf="getIsOrganizer() && currentQuestionData" class="organizer-section">
+        <button
+            *ngIf="getIsOrganizer()"
+            mat-raised-button
+            class="submit"
+            (click)="organizerAction()"
+            [disabled]="!state.showAnswers || state.transitionToNextQuestion"
+        >
+            <mat-icon>input</mat-icon>
+            {{ currentQuestionData.isLastQuestion ? 'Présenter les résultats' : 'Question suivante' }}
+        </button>
+        <div class="stats">
+            <div class="list-container">
+                <app-players-list [playerslist]="players"></app-players-list>
+            </div>
+
+            <div class="histogram-container">
+                <app-histogram [data]="histogramData"></app-histogram>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-container">
+        <button routerLink="/select-game" mat-raised-button color="warn" class="quit">
+            <mat-icon>directions_run</mat-icon>
+            Quitter la partie
+        </button>
+        <div class="score" *ngIf="!getIsOrganizer()">
+            <div class="bonus" *ngIf="state.showBonus">Premier à répondre! Bonus de 20%</div>
+            <div class="total-points">Points Accumulés: {{ state.totalPoints }}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+@import 'src/utilities/variables';
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    background: url('../../../assets/img/background_sharkwiz-min.jpg');
+    background-size: cover;
+}
+
+.button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 18px;
+    height: 75px;
+    width: 300px;
+    padding: 10px;
+    background-color: $primary-color;
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    transition:
+        background-color 0.3s,
+        transform 0.3s;
+
+    .icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button:hover {
+    filter: brightness(90%);
+    transform: translateY(-2px);
+}
+
+.team-name {
+    font-size: 1.5rem;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    position: relative;
+    bottom: 1rem;
+}
+
+.footer-item {
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem;
+    margin-top: auto;
+    position: relative;
+
+    .members {
+        :nth-child(even) {
+            color: $primary-color;
+        }
+
+        :nth-child(odd) {
+            color: black;
+        }
+
+        span {
+            font-weight: 600;
+            font-size: 20px;
+        }
+    }
+}

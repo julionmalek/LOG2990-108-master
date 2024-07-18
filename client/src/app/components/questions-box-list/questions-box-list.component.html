@@ -1,0 +1,21 @@
+<div class="form-container">
+    <div class="question-list">
+        <!-- Entire card is clickable for editing -->
+        <div *ngFor="let question of questions; let i = index" (click)="editQuestion(i)" class="question-card full-width clickable-card">
+            <!-- Question Text -->
+            <div class="mat-card-title">{{ question.text }}</div>
+            <div class="last-mod-style">Dernière modification : {{ question.lastModification | date: 'yyyy-MM-dd HH:mm' }}</div>
+            <!-- Action Buttons -->
+            <div class="mat-card-actions top-padding">
+                <!-- Edit Icon Button -->
+                <button mat-icon-button aria-label="Edit question" (click)="editQuestion(i); $event.stopPropagation()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <!-- Delete Icon Button -->
+                <button mat-icon-button aria-label="Delete question" (click)="deleteQuestion(i); $event.stopPropagation()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

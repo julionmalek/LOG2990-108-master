@@ -1,0 +1,9 @@
+@import 'src/utilities/variables';
+.confirm {
+    background-color: $primary-color;
+    color: white;
+}
+
+.cancel {
+    background-color: $background-color;
+}

@@ -1,0 +1,50 @@
+@import 'src/utilities/variables';
+
+#results-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    #results-container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        align-items: center;
+        height: 100%;
+        position: relative;
+    }
+
+    .footer-container {
+        margin: auto 0 25px 0;
+        display: flex;
+        justify-content: center;
+
+        .quit {
+            width: 20%;
+            height: 50px;
+            font-size: 18px;
+        }
+
+        .score {
+            display: flex;
+            flex-direction: column;
+
+            .total-points {
+                padding: 25px 25px;
+                background-color: $secondary-color;
+                color: white;
+                font-size: 24px;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+.chat-area {
+    float: right;
+    width: 20%;
+    right: 0%;
+    position: absolute;
+    height: 100%;
+    background-color: #efeded;
+}

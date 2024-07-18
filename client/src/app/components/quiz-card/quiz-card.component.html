@@ -1,0 +1,27 @@
+<mat-card
+    [ngStyle]="{ filter: quiz.hidden ? 'brightness(80%)' : null, cursor: isAdminView ? 'default' : null }"
+    class="quiz-card"
+    (click)="isAdminView ? $event.stopPropagation() : click()"
+>
+    <div class="image-container">
+        <img mat-card-image class="image" src="./assets/img/quizcard2.webp" alt="Photo of a Shiba Inu" />
+    </div>
+    <mat-card-title class="title">{{ quiz.title }}</mat-card-title>
+    <mat-card-subtitle class="subtitle">{{ quiz.description }}</mat-card-subtitle>
+
+    <div class="date-duration">
+        <div class="date">Dernière modification: {{ quiz.lastModification | date: 'yyyy-MM-dd HH:mm' }}</div>
+        <div class="duration">
+            <mat-icon class="icon">schedule</mat-icon>
+            <span class="text">{{ quiz.duration }}s</span>
+        </div>
+    </div>
+    <div class="actions" *ngIf="isAdminView">
+        <mat-icon [routerLink]="['/modify-quiz', quiz.id]">edit</mat-icon>
+        <mat-icon class="delete-icon" (click)="delete()">delete</mat-icon>
+        <mat-icon [ngStyle]="{ color: quiz.hidden ? 'blue' : null }" (click)="toggleHidden()">{{
+            quiz.hidden ? 'visibility_off' : 'visibility'
+        }}</mat-icon>
+        <mat-icon (click)="download()">download</mat-icon>
+    </div>
+</mat-card>

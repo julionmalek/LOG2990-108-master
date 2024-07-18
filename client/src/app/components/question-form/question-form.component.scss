@@ -1,0 +1,59 @@
+.form-container {
+    margin: auto;
+    width: 80%;
+}
+
+.question-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.question-width {
+    flex: 3;
+    margin-right: 20px;
+}
+
+.points-width {
+    flex: 1;
+}
+
+.choices-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.add-choice-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.choice-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.choice-width {
+    flex-grow: 1;
+}
+
+.mat-form-field {
+    margin-right: 8px;
+}
+
+.mat-card-actions {
+    justify-content: flex-end;
+}
+
+button.disabled {
+    color: grey;
+    pointer-events: none;
+}
+
+button.active {
+    color: inherit;
+    pointer-events: auto;
+}
